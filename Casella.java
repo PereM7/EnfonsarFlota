@@ -14,7 +14,11 @@ public class Casella {
         partVaixell.setBombardejat();
     }
 
-    public boolean hiHaVaixell(){
+    public void setPartVaixell (PartVaixell part) {
+        this.partVaixell = part;
+    }
+
+    public boolean hiHaPartVaixell(){
         return ( partVaixell != null ) ;
     }
 }

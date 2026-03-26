@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Vaixell {
     private final Direccio direccio;
     private final Posicio posicio;
-    private final int llargari;
+    private final TipusVaixell tipus;
     private ArrayList<PartVaixell> partsVaixell;
 
-    public Vaixell (int llargari, Direccio direccio, Posicio pos) {
-        this.llargari = llargari;
+    public Vaixell (TipusVaixell tipus, Direccio direccio, Posicio pos) {
+        this.tipus = tipus;
         this.direccio = direccio;
         this.posicio = pos;
         this.partsVaixell = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Vaixell {
         int columna = posicio.getColumna();
         Posicio novaPos;
 
-        for (int x = 0; x < llargari; x++) {
+        for (int x = 0; x < tipus.getMida(); x++) {
             if (direccio == Direccio.Vertical) {
                 novaPos = new Posicio((fila + x), columna);
             }else {
@@ -31,8 +31,8 @@ public class Vaixell {
         }
     }
 
-    public int getLlargari () {
-        return this.llargari;
+    public TipusVaixell getTipusVaixell () {
+        return this.tipus;
     }
 
     public Direccio getDireccio () {
@@ -41,6 +41,10 @@ public class Vaixell {
 
     public Posicio getPosicioInicial () {
         return this.posicio;
+    }
+
+    public ArrayList<PartVaixell> getPartsVaixell () {
+        return this.partsVaixell;
     }
 }
 
