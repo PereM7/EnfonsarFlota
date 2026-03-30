@@ -31,6 +31,16 @@ public class Vaixell {
         }
     }
 
+    public boolean vaixellEnfonsat () {
+        int contador = partsVaixell.size() - 1;
+        for (PartVaixell p : partsVaixell) {
+            if (p.getBombardejat()) {
+                contador--;
+            }
+        }
+        return contador == 0;
+    }
+
     public TipusVaixell getTipusVaixell () {
         return this.tipus;
     }

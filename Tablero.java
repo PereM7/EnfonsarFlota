@@ -25,13 +25,28 @@ public class Tablero {
                     int columna = p.getPosicio().getFila();
 
                     tauler[fila][columna].setPartVaixell(p);
+                    tauler[fila][columna].setVaixellPare(vaixells[i]);
                 }
             }
         }
     }
 
-    private boolean comprovarHiHaVaixell () {
-        return false; //Demanar
+    private boolean comprovarHiHaVaixell (Posicio posicio, TipusVaixell tipus, Direccio dir) {
+        int fila = posicio.getFila();
+        int columna = posicio.getColumna();
+
+        for (int x = 0; x < tipus.getMida(); x++) {
+            if (dir == Direccio.Vertical) {
+                if (tauler[fila + x][columna].hiHaPartVaixell()) {
+                    return true;
+                }
+            }else {
+                if (tauler[fila][columna + x].hiHaPartVaixell()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean vaixellTocat (Posicio pos) {
@@ -42,15 +57,27 @@ public class Tablero {
         return tauler[fila][columna].hiHaPartVaixell();
     }
 
-    //Com saber el vaixell? O eliminar el vaixell?
-    private boolean vaixellEnfonsat (Vaixell vaixell) {
-        ArrayList<PartVaixell> part = vaixell.getPartsVaixell();
-        int contador = part.size() - 1;
-        for (PartVaixell p : part) {
-            if (p.getBombardejat()) {
-                contador--;
+    private boolean vaixellEnfonsat (Posicio pos) {
+        int fila = pos.getFila();
+        int columna = pos.getColumna();
+
+        return tauler[fila][columna].vaixellEnfonsat();
+    }
+
+    public void imprimirTauler () {
+        for (int x = 0; x < tauler.length; x++) {
+            for (int y = 0; y < tauler[x].length; y++) {
+                if (tauler[x][y].getBombardejada()) {
+                    System.out.print("·");
+                }
+                else if (tauler[x][y].vaixellEnfonsat()) {
+                    System.out.print("X");
+                }
+                else {
+                    System.out.print("-");
+                }
             }
+            System.out.println();
         }
-        return contador == 0;
     }
 }
