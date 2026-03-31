@@ -14,21 +14,25 @@ public class Tablero {
         this.vaixells = new Vaixell[NOMBRE_VAIXELLS];
     }
 
-    public void assignarVaixell (TipusVaixell tipus, Direccio dir, Posicio posicioInicial) {
-        for (int i = 0; i < vaixells.length; i++) {
-            if (vaixells[i] != null) {
-                vaixells[i] = new Vaixell(tipus, dir, posicioInicial);
+    public boolean assignarVaixell (TipusVaixell tipus, Direccio dir, Posicio posicioInicial) {
+        if (comprovarHiHaVaixell(posicioInicial, tipus, dir)) {
+            for (int i = 0; i < vaixells.length; i++) {
+                if (vaixells[i] != null) {
+                    vaixells[i] = new Vaixell(tipus, dir, posicioInicial);
 
-                ArrayList<PartVaixell> parts = vaixells[i].getPartsVaixell();
-                for (PartVaixell p : parts) {
-                    int fila = p.getPosicio().getFila();
-                    int columna = p.getPosicio().getFila();
+                    ArrayList<PartVaixell> parts = vaixells[i].getPartsVaixell();
+                    for (PartVaixell p : parts) {
+                        int fila = p.getPosicio().getFila();
+                        int columna = p.getPosicio().getFila();
 
-                    tauler[fila][columna].setPartVaixell(p);
-                    tauler[fila][columna].setVaixellPare(vaixells[i]);
+                        tauler[fila][columna].setPartVaixell(p);
+                        p.setVaixellPare(vaixells[i]);
+                    }
                 }
             }
+            return true;
         }
+        return false;
     }
 
     private boolean comprovarHiHaVaixell (Posicio posicio, TipusVaixell tipus, Direccio dir) {

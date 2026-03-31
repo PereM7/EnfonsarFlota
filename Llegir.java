@@ -3,16 +3,16 @@ package Principi.Reptes.EnfonsarFlota;
 import java.util.Scanner;
 
 public class Llegir {
-    private Scanner sn = new Scanner(System.in);
+    private static final Scanner sn = new Scanner(System.in);
 
     public Llegir () {}
 
-    public String demanarNom () {
+    public static String demanarNom () {
         System.out.println("Introdueix el teu nom: ");
         return sn.nextLine();
     }
 
-    private boolean esDinsTauler (Posicio pos) {
+    private static boolean esDinsTauler (Posicio pos) {
         int fila = pos.getFila();
         int columna = pos.getColumna();
 
@@ -22,7 +22,7 @@ public class Llegir {
         return false;
     }
 
-    public Posicio demanarVaixell (TipusVaixell tipus) {
+    public static Posicio demanarVaixell (TipusVaixell tipus) {
         Posicio novaPos;
 
         do {
@@ -33,14 +33,14 @@ public class Llegir {
             novaPos = new Posicio(fila, columna);
 
             if (!esDinsTauler(novaPos)) {
-                System.out.println("Error, han de ser valors del 0 al 8 incluits.");
+                System.out.println("Error, han de ser valors del 0 al 7 incluits.");
             }
         } while (!esDinsTauler(novaPos));
 
         return novaPos;
     }
 
-    public Direccio demanarDireccio () {
+    public static Direccio demanarDireccio () {
         String direccio = "";
         do {
             System.out.println("Introdueix la direcció (H / V): ");
@@ -60,5 +60,23 @@ public class Llegir {
         }
         return dir;
     }
+
+    public static Posicio demanarPosicio () {
+        Posicio novaPos;
+        do {
+            System.out.println("Introdueix fila (0-7): ");
+            int fila = sn.nextInt();
+            System.out.println("Introdueix columna (0-7): ");
+            int columna = sn.nextInt();
+
+            novaPos = new Posicio(fila, columna);
+
+            if (!esDinsTauler(novaPos)) {
+                System.out.println("Error, han de ser valors del 0 al 7 incluits.");
+            }
+        }while(!esDinsTauler(novaPos));
+        return novaPos;
+    }
+
 
 }
