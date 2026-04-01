@@ -45,5 +45,6 @@ public class Joc {
     private boolean haGuanyat (Jugador jugador) {
         Tablero taulerJugador = jugador.getTauler();
         return true;
+
     }
 }
