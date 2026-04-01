@@ -53,7 +53,7 @@ public class Tablero {
         return false;
     }
 
-    private boolean vaixellTocat (Posicio pos) {
+    public boolean vaixellTocat (Posicio pos) {
         int fila = pos.getFila();
         int columna = pos.getColumna();
         tauler[fila][columna].setBombardejada();
@@ -61,24 +61,28 @@ public class Tablero {
         return tauler[fila][columna].hiHaPartVaixell();
     }
 
-    private boolean vaixellEnfonsat (Posicio pos) {
+    public boolean vaixellEnfonsat (Posicio pos) {
         int fila = pos.getFila();
         int columna = pos.getColumna();
 
         return tauler[fila][columna].vaixellEnfonsat();
     }
 
+    public boolean totsVaixellsEnfonsats () {
+        return true;
+    }
+
     public void imprimirTauler () {
         for (int x = 0; x < tauler.length; x++) {
             for (int y = 0; y < tauler[x].length; y++) {
                 if (tauler[x][y].getBombardejada()) {
-                    System.out.print("·");
+                    System.out.print("· ");
                 }
                 else if (tauler[x][y].vaixellEnfonsat()) {
-                    System.out.print("X");
+                    System.out.print("X ");
                 }
                 else {
-                    System.out.print("-");
+                    System.out.print("- ");
                 }
             }
             System.out.println();

@@ -5,9 +5,19 @@ public class Jugador {
     private String nom;
     private Tablero tauler = new Tablero();
 
-    public Jugador (String nom) {
-        this.nom = nom;
+    public Jugador () { }
 
+    public Tablero getTauler() {
+        return this.tauler;
+    }
+    public void setTauler (Tablero tauler) {
+        this.tauler = tauler;
     }
 
+    public String getNom () {
+        return nom;
+    }
+    public void setNom (String nom) {
+        this.nom = nom;
+    }
 }
