@@ -69,10 +69,28 @@ public class Tablero {
     }
 
     public boolean totsVaixellsEnfonsats () {
+        for (int i = 0; i < vaixells.length; i++) {
+            if (!vaixells[i].vaixellEnfonsat()) {
+                return false;
+            }
+        }
         return true;
     }
 
-    public void imprimirTauler () {
+    public void imprimirTaulerIntern () {
+        for (int x = 0; x < tauler.length; x++) {
+            for (int y = 0; y < tauler[x].length; y++) {
+                if (tauler[x][y].hiHaPartVaixell()) {
+                    System.out.print("V ");
+                }
+                else {
+                    System.out.print("- ");
+                }
+            }
+        }
+    }
+
+    public void imprimirTaulerExtern () {
         for (int x = 0; x < tauler.length; x++) {
             for (int y = 0; y < tauler[x].length; y++) {
                 if (tauler[x][y].getBombardejada()) {

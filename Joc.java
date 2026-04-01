@@ -1,13 +1,23 @@
 package Principi.Reptes.EnfonsarFlota;
 
 public class Joc {
-    private Jugador j1;
-    private Jugador j2;
+    private Jugador[] players = new Jugador[2];
     private int torn = 0;
+    private final int NOMBRE_VAIXELLS = 5;
+    private TipusVaixell[] vaixellsNecessaris;
 
-    public Joc (Jugador j1, Jugador j2) {
-        this.j1 = j1;
-        this.j2 = j2;
+    public Joc () {
+        iniciarVaixellsNecessaris();
+    }
+
+    private void iniciarVaixellsNecessaris () {
+        vaixellsNecessaris = new TipusVaixell[NOMBRE_VAIXELLS];
+        vaixellsNecessaris[0] = TipusVaixell.Portaavions;
+        vaixellsNecessaris[1] = TipusVaixell.Blindat;
+        vaixellsNecessaris[2] = TipusVaixell.Blindat;
+        vaixellsNecessaris[3] = TipusVaixell.Destructor;
+        vaixellsNecessaris[4] = TipusVaixell.Destructor;
+        //Dudoso
     }
 
     private void nomJugador (Jugador jugador) {
@@ -15,8 +25,8 @@ public class Joc {
         jugador.setNom(nom);
     }
 
-    private void iniciarVaixell (Jugador jugador, TipusVaixell tipus) {
-        Tablero taulerJugador = jugador.getTauler();
+    private void iniciarVaixell (TipusVaixell tipus) {
+        Tablero taulerJugador = players[torn % 2].getTauler();
         Posicio posPortaavions;
         Direccio dir;
         do {
@@ -29,8 +39,8 @@ public class Joc {
         } while(taulerJugador.assignarVaixell(tipus, dir, posPortaavions));
     }
 
-    private void bombardejar (Jugador jugador) {
-        Tablero taulerJugador = jugador.getTauler();
+    private void bombardejar () {
+        Tablero taulerJugador = players[torn % 2].getTauler();
         Posicio posBomba = Llegir.demanarPosicio();
         if (taulerJugador.vaixellTocat(posBomba)) {
             System.out.println("Vaixell tocat!");
@@ -42,9 +52,30 @@ public class Joc {
         }
     }
 
-    private boolean haGuanyat (Jugador jugador) {
-        Tablero taulerJugador = jugador.getTauler();
-        return true;
+    private boolean haGuanyat () {
+        Tablero taulerJugador = players[torn % 2].getTauler();
+        if (taulerJugador.totsVaixellsEnfonsats()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void jugar () {
+
+        nomJugador(players[0]);
+        nomJugador(players[1]);
+
+        for (int i = 0; i < vaixellsNecessaris.length; i++) {
+
+            iniciarVaixell(vaixellsNecessaris[i]);
+            System.out.println(vaixellsNecessaris[i] + " afegit.");
+
+        }
+
+        do {
+
+
+        } while (!haGuanyat());
 
     }
 }
