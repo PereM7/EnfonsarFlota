@@ -8,6 +8,7 @@ public class Joc {
 
     public Joc () {
         iniciarVaixellsNecessaris();
+        iniciarPlayers();
     }
 
     private void iniciarVaixellsNecessaris () {
@@ -17,6 +18,11 @@ public class Joc {
         vaixellsNecessaris[2] = TipusVaixell.Blindat;
         vaixellsNecessaris[3] = TipusVaixell.Destructor;
         vaixellsNecessaris[4] = TipusVaixell.Destructor;
+        //Dudoso
+    }
+    private void iniciarPlayers () {
+        players[0] = new Jugador();
+        players[1] = new Jugador();
         //Dudoso
     }
 
@@ -36,11 +42,15 @@ public class Joc {
             if (!taulerJugador.assignarVaixell(tipus, dir, posPortaavions)) {
                 System.out.println("Error, ja hi ha un vaixell.");
             }
-        } while(taulerJugador.assignarVaixell(tipus, dir, posPortaavions));
+            else {
+                System.out.println(tipus + " afegit.");
+                break;
+            }
+        } while(true);
     }
 
     private void bombardejar () {
-        Tablero taulerJugador = players[torn % 2].getTauler();
+        Tablero taulerJugador = players[(torn % 2) + 1].getTauler();
         Posicio posBomba = Llegir.demanarPosicio();
         if (taulerJugador.vaixellTocat(posBomba)) {
             System.out.println("Vaixell tocat!");
@@ -65,17 +75,26 @@ public class Joc {
         nomJugador(players[0]);
         nomJugador(players[1]);
 
-        for (int i = 0; i < vaixellsNecessaris.length; i++) {
 
-            iniciarVaixell(vaixellsNecessaris[i]);
-            System.out.println(vaixellsNecessaris[i] + " afegit.");
-
-        }
 
         do {
-
-
-        } while (!haGuanyat());
-
+            Tablero taulerJugador = players[torn % 2].getTauler();
+            System.out.println("Torn del jugador " + players[torn % 2].getNom());
+            if (torn == 0 || torn == 1) {
+                for (int i = 0; i < vaixellsNecessaris.length; i++) {
+                    taulerJugador.imprimirTaulerIntern();
+                    iniciarVaixell(vaixellsNecessaris[i]);
+                }
+            }
+            else {
+                taulerJugador.imprimirTaulerExtern();
+                bombardejar();
+                if (haGuanyat()) {
+                    System.out.println(players[torn % 2].getNom() + " has Guanyat!!!");
+                    break;
+                }
+            }
+            torn++;
+        } while (true);
     }
 }

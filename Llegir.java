@@ -77,6 +77,4 @@ public class Llegir {
         }while(!esDinsTauler(novaPos));
         return novaPos;
     }
-
-
 }

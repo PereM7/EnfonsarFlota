@@ -12,25 +12,34 @@ public class Tablero {
     public Tablero () {
         this.tauler = new Casella[ALTURA][AMPLARI];
         this.vaixells = new Vaixell[NOMBRE_VAIXELLS];
+        iniciarTauler();
+    }
+
+    private void iniciarTauler () {
+        for (int x = 0; x < tauler.length; x++) {
+            for (int y = 0; y < tauler[x].length; y++) {
+                tauler[x][y] = new Casella();
+            }
+        }
     }
 
     public boolean assignarVaixell (TipusVaixell tipus, Direccio dir, Posicio posicioInicial) {
-        if (comprovarHiHaVaixell(posicioInicial, tipus, dir)) {
+        if (!comprovarHiHaVaixell(posicioInicial, tipus, dir)) {
             for (int i = 0; i < vaixells.length; i++) {
-                if (vaixells[i] != null) {
+                if (vaixells[i] == null) {
                     vaixells[i] = new Vaixell(tipus, dir, posicioInicial);
 
                     ArrayList<PartVaixell> parts = vaixells[i].getPartsVaixell();
                     for (PartVaixell p : parts) {
                         int fila = p.getPosicio().getFila();
-                        int columna = p.getPosicio().getFila();
+                        int columna = p.getPosicio().getColumna();
 
                         tauler[fila][columna].setPartVaixell(p);
                         p.setVaixellPare(vaixells[i]);
                     }
+                    return true;
                 }
             }
-            return true;
         }
         return false;
     }
@@ -70,7 +79,7 @@ public class Tablero {
 
     public boolean totsVaixellsEnfonsats () {
         for (int i = 0; i < vaixells.length; i++) {
-            if (!vaixells[i].vaixellEnfonsat()) {
+            if (vaixells[i] != null &&!vaixells[i].vaixellEnfonsat()) {
                 return false;
             }
         }
@@ -87,6 +96,7 @@ public class Tablero {
                     System.out.print("- ");
                 }
             }
+            System.out.println();
         }
     }
 
