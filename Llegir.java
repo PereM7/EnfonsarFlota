@@ -16,10 +16,24 @@ public class Llegir {
         int fila = pos.getFila();
         int columna = pos.getColumna();
 
-        if ((fila <= 8 && fila >= 0) && (columna <= 8 && columna >= 0)) {
+        if ((fila <= 7 && fila >= 0) && (columna <= 7 && columna >= 0)) {
             return true;
         }
         return false;
+    }
+
+    public static boolean demanarAleatori () {
+        String volAleatori = "";
+        do {
+            System.out.println("Vols posar els vaixells aleatoriament? (S/N)");
+            volAleatori = sn.nextLine().toLowerCase();
+
+            if (!volAleatori.equals("s") && !volAleatori.equals("n")) {
+                System.out.println("Error, ha de ser S o N.");
+            }else {
+                return volAleatori.equals("s");
+            }
+        } while (true);
     }
 
     public static Posicio demanarVaixell (TipusVaixell tipus) {
@@ -44,6 +58,7 @@ public class Llegir {
         String direccio = "";
         do {
             System.out.println("Introdueix la direcció (H / V): ");
+            sn.nextLine();
             direccio = sn.nextLine().toLowerCase();
 
             if (!direccio.equals("h") && !direccio.equals("v")) {

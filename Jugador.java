@@ -10,9 +10,6 @@ public class Jugador {
     public Tablero getTauler() {
         return this.tauler;
     }
-    public void setTauler (Tablero tauler) {
-        this.tauler = tauler;
-    }
 
     public String getNom () {
         return nom;

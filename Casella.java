@@ -11,7 +11,9 @@ public class Casella {
     }
     public void setBombardejada () {
         this.bombardejada = true;
-        partVaixell.setBombardejat();
+        if (partVaixell != null) {
+            partVaixell.setBombardejat();
+        }
     }
 
     public void setPartVaixell (PartVaixell part) {

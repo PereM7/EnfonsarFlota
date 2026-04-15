@@ -103,11 +103,15 @@ public class Tablero {
     public void imprimirTaulerExtern () {
         for (int x = 0; x < tauler.length; x++) {
             for (int y = 0; y < tauler[x].length; y++) {
-                if (tauler[x][y].getBombardejada()) {
+
+                if (tauler[x][y].hiHaPartVaixell() && tauler[x][y].vaixellEnfonsat()) {
+                    System.out.print("X ");
+                }
+                else if (tauler[x][y].hiHaPartVaixell() && tauler[x][y].getBombardejada()) {
                     System.out.print("· ");
                 }
-                else if (tauler[x][y].hiHaPartVaixell() && tauler[x][y].vaixellEnfonsat()) {
-                    System.out.print("X ");
+                else if (tauler[x][y].getBombardejada()) {
+                    System.out.print("A");
                 }
                 else {
                     System.out.print("- ");
