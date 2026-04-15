@@ -106,7 +106,7 @@ public class Tablero {
                 if (tauler[x][y].getBombardejada()) {
                     System.out.print("· ");
                 }
-                else if (tauler[x][y].vaixellEnfonsat()) {
+                else if (tauler[x][y].hiHaPartVaixell() && tauler[x][y].vaixellEnfonsat()) {
                     System.out.print("X ");
                 }
                 else {

@@ -50,7 +50,13 @@ public class Joc {
     }
 
     private void bombardejar () {
-        Tablero taulerJugador = players[(torn % 2) + 1].getTauler();
+        int contador;
+        if (torn % 2 == 0) {
+            contador = 1;
+        }
+        else {contador = 0; }//dudoso
+
+        Tablero taulerJugador = players[contador].getTauler();
         Posicio posBomba = Llegir.demanarPosicio();
         if (taulerJugador.vaixellTocat(posBomba)) {
             System.out.println("Vaixell tocat!");
@@ -71,11 +77,8 @@ public class Joc {
     }
 
     public void jugar () {
-
         nomJugador(players[0]);
         nomJugador(players[1]);
-
-
 
         do {
             Tablero taulerJugador = players[torn % 2].getTauler();
