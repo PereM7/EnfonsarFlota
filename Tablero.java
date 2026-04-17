@@ -50,11 +50,11 @@ public class Tablero {
 
         for (int x = 0; x < tipus.getMida(); x++) {
             if (dir == Direccio.Vertical) {
-                if (tauler[fila + x][columna].hiHaPartVaixell()) {
+                if ((fila + x) >= tauler.length || tauler[fila + x][columna].hiHaPartVaixell()) {
                     return true;
                 }
             }else {
-                if (tauler[fila][columna + x].hiHaPartVaixell()) {
+                if ((columna + x) >= tauler[fila].length || tauler[fila][columna + x].hiHaPartVaixell()) {
                     return true;
                 }
             }
