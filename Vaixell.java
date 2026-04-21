@@ -41,10 +41,6 @@ public class Vaixell {
         return contador == 0;
     }
 
-    public TipusVaixell getTipusVaixell() {
-        return tipus;
-    }
-
     public ArrayList<PartVaixell> getPartsVaixell () {
         return this.partsVaixell;
     }
